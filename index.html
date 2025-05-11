@@ -32,13 +32,70 @@
     <main>
       <section id="home">
         <h1>Hi, I’m Shane.</h1>
-        <p>I'm a Cyber-Security consultant and this site showcases my work and ideas.</p>
+        <p>I'm a Technology consultant and this site showcases some of my work and ideas.</p>
       </section>
+
+      <section id="project-gallery">
+        <div class="carousel-wrapper">
+          <button class="carousel-arrow left" aria-label="Previous">&#10094;</button>
+          
+          <div class="carousel-track">
+            <div class="carousel-item">
+              <a href="html/projects.html#AzDDoS-SimulatorLab">
+                <img src="assets/images/ddos_thumb.JPG" alt="DDoS Lab" class="invertable"  />
+                <span>DDoS Simulator Lab</span>
+              </a>
+            </div>
+            <div class="carousel-item">
+              <a href="html/projects.html#wishart_ensemble_maps">
+                <img src="assets/images/wishart_thumb.JPG" alt="Wishart" class="invertable"  />
+                <span>Wishart Spectral Density</span>
+              </a>
+            </div>
+            <div class="carousel-item">
+              <a href="html/projects.html#AzSecuredLandingZone-Lab">
+                <img src="assets/images/landingzone_thumb.png" alt="Landing Zone" />
+                <span>Secured Landing Zone Lab</span>
+              </a>
+            </div>
+          </div>
+
+          <button class="carousel-arrow right" aria-label="Next">&#10095;</button>
+        </div>
+      </section>
+
+
     </main>
+
 
     <footer>
       <p>© 2025 Shane Baccas</p>
     </footer>
   </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const items = document.querySelectorAll(".carousel-item");
+        const left = document.querySelector(".carousel-arrow.left");
+        const right = document.querySelector(".carousel-arrow.right");
+
+        let current = 0;
+        items[current].classList.add("active");
+
+        function updateCarousel(index) {
+          items.forEach(item => item.classList.remove("active"));
+          items[index].classList.add("active");
+        }
+
+        left.addEventListener("click", () => {
+          current = (current - 1 + items.length) % items.length;
+          updateCarousel(current);
+        });
+
+        right.addEventListener("click", () => {
+          current = (current + 1) % items.length;
+          updateCarousel(current);
+        });
+      });
+    </script>
 </body>
 </html>
