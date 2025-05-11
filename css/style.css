@@ -217,13 +217,18 @@ footer {
 }
 
 
-/* Invert images only in light mode */
+/* Invert images only in dark mode */
 [data-theme="dark"] img.invertable {
   filter: invert(100%) hue-rotate(180deg);
   transition: filter 0.5s ease;
 }
 
 
+/* Invert images only in light mode */
+[data-theme="light"] img.liginvertable {
+  filter: invert(100%) hue-rotate(180deg);
+  transition: filter 0.5s ease;
+}
 
 
 @media (max-width: 768px) {
