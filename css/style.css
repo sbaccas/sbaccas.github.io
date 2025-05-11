@@ -252,8 +252,13 @@ footer {
   }
 
   .social-links {
-    display: none; /* optional: hide for small screens */
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    width: 100%;
+    margin-top: 1rem;
   }
+
 
   .page {
     padding: 1rem;
