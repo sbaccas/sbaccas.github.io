@@ -222,3 +222,67 @@ footer {
   filter: invert(100%) hue-rotate(180deg);
   transition: filter 0.5s ease;
 }
+
+
+
+
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+
+  header {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+  }
+
+  nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .logo {
+    max-width: 120px;
+  }
+
+  .social-links {
+    display: none; /* optional: hide for small screens */
+  }
+
+  .page {
+    padding: 1rem;
+  }
+
+  main {
+    padding: 1rem;
+    max-width: 100%;
+  }
+
+  .carousel-wrapper {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .carousel-arrow {
+    font-size: 2.5rem;
+    padding: 0.5rem;
+  }
+
+  .carousel-item img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: auto;
+    max-width: 90vw;
+  }
+
+  .carousel-item span {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+}
