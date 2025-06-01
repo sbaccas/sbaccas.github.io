@@ -126,6 +126,9 @@ footer {
   color: var(--text-color);
 }
 
+.pdf-link i:hover {
+  color: #e63946; /* PDF red */
+}
 
 #cv ul {
   list-style-type: disc;
