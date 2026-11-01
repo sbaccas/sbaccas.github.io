@@ -1,0 +1,173 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8.5 5 L 0 8.5 z" fill="#e5e5e5"/>
+    </marker>
+    <marker id="arrow-dim" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8.5 5 L 0 8.5 z" fill="#a3a3a3"/>
+    </marker>
+    <style>
+      .bg { fill: #050505; }
+      .title { font-family: 'IBM Plex Mono', 'Courier New', monospace; font-size: 20px; font-weight: 700; fill: #ffffff; letter-spacing: 2px; }
+      .subtitle { font-family: 'IBM Plex Mono', 'Courier New', monospace; font-size: 13px; fill: #9ca3af; letter-spacing: 0.8px; }
+      .cluster { fill: #0b0b0b; stroke: #525252; stroke-width: 1.5; stroke-dasharray: 6 4; rx: 6; }
+      .cluster-strong { fill: #0d0d0d; stroke: #d4d4d4; stroke-width: 1.75; rx: 6; }
+      .cluster-label { font-family: 'IBM Plex Mono', 'Courier New', monospace; font-size: 13px; font-weight: 700; fill: #ffffff; letter-spacing: 1px; text-transform: uppercase; }
+      .node { fill: #121212; stroke: #e5e5e5; stroke-width: 1.5; rx: 4; }
+      .node-accent { fill: #171717; stroke: #ffffff; stroke-width: 2; rx: 4; }
+      .node-title { font-family: 'IBM Plex Sans', 'Helvetica Neue', sans-serif; font-size: 14px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .node-sub { font-family: 'IBM Plex Mono', 'Courier New', monospace; font-size: 11.5px; fill: #b5b5b5; text-anchor: middle; }
+      .edge { stroke: #d4d4d4; stroke-width: 1.5; fill: none; }
+      .edge-dashed { stroke: #9ca3af; stroke-width: 1.4; stroke-dasharray: 5 4; fill: none; }
+      .edge-label-bg { fill: #050505; stroke: #404040; stroke-width: 1; rx: 3; }
+      .edge-label { font-family: 'IBM Plex Mono', 'Courier New', monospace; font-size: 10.5px; fill: #d4d4d4; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1600" height="900" class="bg"/>
+  <rect x="20" y="20" width="1560" height="860" fill="none" stroke="#262626" stroke-width="1"/>
+
+  <!-- Header -->
+  <text x="50" y="58" class="title">AGENT ZOO (CAT &amp; MOUSE) — MULTI-SERVICE SYSTEM ARCHITECTURE</text>
+  <text x="50" y="80" class="subtitle">Authoritative 100x100 Grid Engine (:8000) · Universal Agent Harness (:8001/:8003/:8005) · MCP Server (:9050) · Vertex AI Gemini 2.5 Flash</text>
+  <line x1="50" y1="95" x2="1550" y2="95" stroke="#333333" stroke-width="1"/>
+
+  <!-- TOP ROW: Interactive Web Consoles -->
+  <rect x="50" y="115" width="1500" height="115" class="cluster"/>
+  <text x="70" y="138" class="cluster-label">Interactive Web Consoles (11 Live Observability Views)</text>
+
+  <rect x="75" y="152" width="335" height="62" class="node"/>
+  <text x="242" y="177" class="node-title">Arena Board, Boxscore, Heatmap &amp; SRE</text>
+  <text x="242" y="198" class="node-sub">http://127.0.0.1:8000</text>
+
+  <rect x="445" y="152" width="335" height="62" class="node"/>
+  <text x="612" y="177" class="node-title">Cat-1 &amp; Cat-2 Agent Workbenches</text>
+  <text x="612" y="198" class="node-sub">http://127.0.0.1:8001 &amp; :8003</text>
+
+  <rect x="815" y="152" width="335" height="62" class="node"/>
+  <text x="982" y="177" class="node-title">Evil Cat Multimodal Workbench</text>
+  <text x="982" y="198" class="node-sub">http://127.0.0.1:8005</text>
+
+  <rect x="1185" y="152" width="340" height="62" class="node"/>
+  <text x="1355" y="177" class="node-title">MCP Tool Stream, Chat &amp; Coach Notes</text>
+  <text x="1355" y="198" class="node-sub">http://127.0.0.1:9050</text>
+
+  <!-- LEFT COLUMN: Authoritative Game Server (:8000) -->
+  <rect x="50" y="280" width="385" height="410" class="cluster-strong"/>
+  <text x="70" y="306" class="cluster-label">Authoritative Game Server (:8000)</text>
+
+  <rect x="80" y="330" width="325" height="82" class="node-accent"/>
+  <text x="242" y="362" class="node-title">100×100 Grid Physics &amp; Combat Engine</text>
+  <text x="242" y="384" class="node-sub">90° FoV Raycasting · 3×2 Slash Cones</text>
+  <text x="242" y="400" class="node-sub">OSRS Tick &amp; Cooldown Locks</text>
+
+  <rect x="80" y="445" width="325" height="75" class="node"/>
+  <text x="242" y="476" class="node-title">21×21 Ego-Centric PNG Renderer</text>
+  <text x="242" y="498" class="node-sub">Multimodal Visual Viewport Crop</text>
+
+  <rect x="80" y="555" width="325" height="80" class="node"/>
+  <text x="242" y="588" class="node-title">OpenTelemetry Span &amp; Exemplar Store</text>
+  <text x="242" y="610" class="node-sub">p50/p95 Latency · Cloud Trace Waterfall</text>
+
+  <!-- CENTER COLUMN: Universal Agent Harness (:8001 / :8003 / :8005) -->
+  <rect x="505" y="280" width="585" height="410" class="cluster-strong"/>
+  <text x="525" y="306" class="cluster-label">Universal Agent Harness (:8001 / :8003 / :8005)</text>
+
+  <rect x="530" y="330" width="340" height="82" class="node-accent"/>
+  <text x="700" y="360" class="node-title">Fast-Brain Actor (Gem1)</text>
+  <text x="700" y="382" class="node-sub">Tick-by-Tick JSON + PNG Deliberation</text>
+  <text x="700" y="398" class="node-sub">512 Thinking Tokens · Sliding Context</text>
+
+  <rect x="890" y="330" width="175" height="82" class="node"/>
+  <text x="977" y="362" class="node-title">System-1 Reflex</text>
+  <text x="977" y="382" class="node-sub">0.008ms Fallback</text>
+  <text x="977" y="398" class="node-sub">Timeout Guard</text>
+
+  <rect x="530" y="445" width="255" height="75" class="node"/>
+  <text x="657" y="475" class="node-title">Injected Markdown Skills</text>
+  <text x="657" y="497" class="node-sub">skills.md + coach_skills.md</text>
+
+  <rect x="810" y="445" width="255" height="75" class="node"/>
+  <text x="937" y="475" class="node-title">Published Standing Orders</text>
+  <text x="937" y="497" class="node-sub">coaching_notes.md (Hot-Reload)</text>
+
+  <rect x="530" y="555" width="535" height="85" class="node-accent"/>
+  <text x="797" y="586" class="node-title">Slow-Brain Strategic Coach (Gem2)</text>
+  <text x="797" y="608" class="node-sub">Asynchronous 2-Call Max Loop · 4,096 Thinking Tokens</text>
+  <text x="797" y="625" class="node-sub">Call 1: Parallel MCP + A2A Recon  |  Call 2: Standing Order Synthesis</text>
+
+  <!-- RIGHT COLUMN: Cat & Mouse MCP Server (:9050) -->
+  <rect x="1160" y="280" width="390" height="410" class="cluster-strong"/>
+  <text x="1180" y="306" class="cluster-label">Cat &amp; Mouse MCP Server (:9050)</text>
+
+  <rect x="1190" y="330" width="330" height="82" class="node-accent"/>
+  <text x="1355" y="360" class="node-title">MCP Telemetry &amp; Tool Router</text>
+  <text x="1355" y="382" class="node-sub">get_boxscore · get_AsciiMap</text>
+  <text x="1355" y="398" class="node-sub">read_coach_notes · write_coach_note</text>
+
+  <rect x="1190" y="445" width="330" height="75" class="node"/>
+  <text x="1355" y="475" class="node-title">Private Notebook Store</text>
+  <text x="1355" y="497" class="node-sub">coach_memory.jsonl (Confidential)</text>
+
+  <rect x="1190" y="555" width="330" height="85" class="node"/>
+  <text x="1355" y="588" class="node-title">A2A Radio &amp; Broadcast Ledger</text>
+  <text x="1355" y="610" class="node-sub">/.well-known/agent.json · /a2a/messages</text>
+
+  <!-- BOTTOM ROW: Google Cloud Vertex AI -->
+  <rect x="505" y="735" width="585" height="110" class="cluster-strong"/>
+  <text x="525" y="760" class="cluster-label">Google Cloud Vertex AI</text>
+
+  <rect x="530" y="772" width="535" height="56" class="node-accent"/>
+  <text x="797" y="800" class="node-title">Gemini 2.5 Flash (Google ADK &amp; Vertex AI SDK)</text>
+  <text x="797" y="818" class="node-sub">Structured JSON Action Output · Multimodal Vision · Native Tool Calling</text>
+
+  <!-- CONNECTIONS / ARROWS -->
+  <!-- UI to Services -->
+  <line x1="242" y1="214" x2="242" y2="328" class="edge" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <line x1="612" y1="214" x2="612" y2="328" class="edge" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <line x1="982" y1="214" x2="760" y2="328" class="edge" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <line x1="1355" y1="214" x2="1355" y2="328" class="edge" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+
+  <!-- Engine <--> Actor WebSocket -->
+  <line x1="405" y1="365" x2="528" y2="365" class="edge" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <rect x="414" y="343" width="106" height="18" class="edge-label-bg"/>
+  <text x="467" y="356" class="edge-label">WS /ws/agents</text>
+
+  <!-- Viewport -->
+  <path d="M 405 482 L 470 482 L 470 390 L 528 390" class="edge-dashed" marker-end="url(#arrow-dim)"/>
+  <rect x="415" y="463" width="90" height="18" class="edge-label-bg"/>
+  <text x="460" y="476" class="edge-label">21×21 PNG</text>
+
+  <!-- Actor -> Reflex -->
+  <line x1="870" y1="371" x2="888" y2="371" class="edge" marker-end="url(#arrow)"/>
+
+  <!-- Skills -> Actor & Coach -->
+  <line x1="657" y1="445" x2="657" y2="414" class="edge" marker-end="url(#arrow)"/>
+  <line x1="657" y1="520" x2="657" y2="553" class="edge" marker-end="url(#arrow)"/>
+
+  <!-- Coach -> Orders -> Actor -->
+  <line x1="937" y1="555" x2="937" y2="522" class="edge" marker-end="url(#arrow)"/>
+  <line x1="937" y1="445" x2="810" y2="414" class="edge" marker-end="url(#arrow)"/>
+
+  <!-- Coach <--> MCP Tools -->
+  <path d="M 1065 580 L 1125 580 L 1125 371 L 1188 371" class="edge" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <rect x="1080" y="455" width="90" height="18" class="edge-label-bg"/>
+  <text x="1125" y="468" class="edge-label">SSE / MCP</text>
+
+  <!-- MCP Tools -> Private Notebook -->
+  <line x1="1355" y1="412" x2="1355" y2="443" class="edge" marker-end="url(#arrow)"/>
+
+  <!-- Coach <--> A2A ChatLog -->
+  <line x1="1065" y1="605" x2="1188" y2="605" class="edge" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <rect x="1082" y="586" width="88" height="18" class="edge-label-bg"/>
+  <text x="1126" y="599" class="edge-label">P2P A2A</text>
+
+  <!-- Engine -> OTel -->
+  <line x1="242" y1="412" x2="242" y2="443" class="edge-dashed" marker-end="url(#arrow-dim)"/>
+  <line x1="242" y1="520" x2="242" y2="553" class="edge-dashed" marker-end="url(#arrow-dim)"/>
+
+  <!-- Actor & Coach <--> Vertex AI Gemini 2.5 Flash -->
+  <line x1="797" y1="640" x2="797" y2="770" class="edge" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <path d="M 560 412 L 560 770" class="edge" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+</svg>

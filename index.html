@@ -2,112 +2,259 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shane Baccas</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <meta name="description" content="Shane Baccas — Engineering consultant showcasing mathematical models, cloud architecture, security engineering, and multi-agent AI systems." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
   <link rel="stylesheet" href="css/style.css" />
   <script src="js/light_toggle.js" defer></script>
 </head>
 <body>
   <header>
-    <img src="assets/images/logo2.png" alt="Shane Baccas Logo" class="logo liginvertable"  />
+    <a href="index.html" class="logo-link" aria-label="Shane Baccas Home">
+      <img src="assets/images/logo2.png" alt="Shane Baccas Logo" class="logo liginvertable" />
+    </a>
+
     <nav>
       <button id="light-toggle" class="toggle-btn" aria-label="Toggle Theme">
-      <i class="fas fa-circle-half-stroke"></i>  </button>
-      <a href="index.html">Home</a>
+        <i class="fas fa-circle-half-stroke"></i>
+        <span>Theme</span>
+      </button>
+      <a href="index.html" class="active">Home</a>
       <a href="html/cv.html">CV</a>
       <a href="html/projects.html">Projects</a>
     </nav>
-      <div class="social-links">
-    <a href="https://github.com/sbaccas" target="_blank" aria-label="GitHub">
-      <i class="fab fa-github"></i>
-    </a>
-    <a href="https://www.linkedin.com/in/shane-baccas-a96bb0195" target="_blank" aria-label="LinkedIn">
-      <i class="fab fa-linkedin"></i>
-    </a>
-  </div>
+
+    <div class="social-links">
+      <a href="https://github.com/sbaccas" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+        <i class="fab fa-github"></i>
+      </a>
+      <a href="https://www.linkedin.com/in/shane-baccas-a96bb0195" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </div>
   </header>
 
   <div class="page">
     <main>
       <section id="home">
         <h1>Hi, I’m Shane.</h1>
-        <p>I'm an Engineering consultant and this site showcases some of my work and ideas.</p>
-      </section>
-
-      <section id="project-gallery">
-        <div class="carousel-wrapper">
-          <button class="carousel-arrow left" aria-label="Previous">&#10094;</button>
-          
-          <div class="carousel-track">
-            <div class="carousel-item">
-              <a href="agent-zoo/index.html">
-                <img src="assets/images/agent_zoo_thumb.png" alt="Agent Zoo (Cat &amp; Mouse)" />
-                <span>Agent Zoo: Multi-Agent LLM Spatial &amp; Deception Lab</span>
-              </a>
-            </div>
-            <div class="carousel-item">
-              <a href="html/projects.html#AzDDoS-SimulatorLab">
-                <img src="assets/images/ddos_thumb.png" alt="DDoS Lab"  />
-                <span>DDoS Simulator Lab</span>
-              </a>
-            </div>
-            <div class="carousel-item">
-              <a href="html/projects.html#wishart_ensemble_maps">
-                <img src="assets/images/wishart_thumb.png" alt="Wishart" />
-                <span>Wishart Spectral Density</span>
-              </a>
-            </div>
-            <div class="carousel-item">
-              <a href="html/projects.html#AzDDoS-SimulatorLab">
-                <img src="assets/images/bayes.png" alt="DDoS Lab"  />
-                <span>Bayesian Neural Network Matrix Factorization</span>
-              </a>
-            </div>
-            <div class="carousel-item">
-              <a href="html/projects.html#AzSecuredLandingZone-Lab">
-                <img src="assets/images/landingzone_thumb.jpg" alt="Landing Zone" />
-                <span>Secured Landing Zone Lab</span>
-              </a>
-            </div>
-          </div>
-
-          <button class="carousel-arrow right" aria-label="Next">&#10095;</button>
+        <p class="lead">
+          I'm an Engineering consultant and this site showcases some of my work and ideas.
+        </p>
+        <div class="discipline-strip">
+          <span class="discipline-pill">Cloud Architecture (GCP / Azure)</span>
+          <span class="discipline-pill">Multi-Agent AI (ADK / LangChain / LangGraph)</span>
+          <span class="discipline-pill">Zero Trust &amp; Security</span>
         </div>
       </section>
 
+      <section id="project-gallery">
+        <div class="section-header">
+          <h2 class="section-title">Featured Work</h2>
+          <span id="carousel-counter" class="section-meta">01 / 05</span>
+        </div>
 
+        <div class="carousel-card">
+          <div class="carousel-track">
+            <div class="carousel-item active">
+              <a href="html/projects.html#wishart-ensemble" class="carousel-media-link">
+                <img src="assets/images/wishart_thumb.png" alt="Wishart Ensemble Spectral Density" class="liginvertable" />
+              </a>
+              <div class="carousel-caption">
+                <span class="carousel-tag">Random Matrix Theory · Enumerative Combinatorics</span>
+                <div class="carousel-title-row">
+                  <a href="html/projects.html#wishart-ensemble" class="carousel-title-link">
+                    Wishart Spectral Density &amp; Combinatorial Maps &rarr;
+                  </a>
+                </div>
+                <p class="carousel-desc">
+                  Analytical and computational investigation into random matrix spectral distributions and combinatorial genus expansions from my M.Sc. mathematics thesis.
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <a href="html/projects.html#bayesian-bandits" class="carousel-media-link">
+                <img src="assets/images/bayes.png" alt="Bayesian Neural Network Matrix Factorization" class="liginvertable" />
+              </a>
+              <div class="carousel-caption">
+                <span class="carousel-tag">Probabilistic Machine Learning · Contextual Bandits</span>
+                <div class="carousel-title-row">
+                  <a href="html/projects.html#bayesian-bandits" class="carousel-title-link">
+                    Bayesian Neural Network Matrix Factorization &rarr;
+                  </a>
+                </div>
+                <p class="carousel-desc">
+                  Combining variational matrix factorization with posterior uncertainty estimates to guide exploration-exploitation in bandit recommendation.
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <a href="html/projects.html#quarantine-ddos" class="carousel-media-link">
+                <img src="assets/images/ddos_thumb.png" alt="Quarantine Network Dynamics and DDoS Lab" class="liginvertable" />
+              </a>
+              <div class="carousel-caption">
+                <span class="carousel-tag">Dynamical Game Theory · Network Security</span>
+                <div class="carousel-title-row">
+                  <a href="html/projects.html#quarantine-ddos" class="carousel-title-link">
+                    Quarantine Network Dynamics &amp; DDoS Simulator Lab &rarr;
+                  </a>
+                </div>
+                <p class="carousel-desc">
+                  Dynamical game-theoretic cost modeling and network simulation for automated quarantining under distributed denial-of-service attacks.
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <a href="html/projects.html#secured-landing-zone" class="carousel-media-link">
+                <img src="assets/images/landingzone_thumb.jpg" alt="Secured Landing Zone Lab" class="invertable" />
+              </a>
+              <div class="carousel-caption">
+                <span class="carousel-tag">Cloud Architecture · Zero Trust Networking</span>
+                <div class="carousel-title-row">
+                  <a href="html/projects.html#secured-landing-zone" class="carousel-title-link">
+                    Secured Landing Zone Lab &rarr;
+                  </a>
+                </div>
+                <p class="carousel-desc">
+                  Hub-and-spoke cloud landing zone topology with identity segmentation, firewall egress routing, and NSG hardening.
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <a href="agent-zoo/index.html" class="carousel-media-link">
+                <img src="assets/images/agent_zoo_arch.svg" alt="Agent Zoo Multi-Service System Architecture" class="liginvertable" />
+              </a>
+              <div class="carousel-caption">
+                <span class="carousel-tag">Multi-Agent Systems · Dual-Brain Cognition</span>
+                <div class="carousel-title-row">
+                  <a href="agent-zoo/index.html" class="carousel-title-link">
+                    Agent Zoo: Multi-Agent LLM Spatial &amp; Deception Lab &rarr;
+                  </a>
+                </div>
+                <p class="carousel-desc">
+                  Distributed 5-service cognitive laboratory testing whether frontier LLMs can invent spatial search geometry, coaching doctrines, and game-theoretic alliances.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-controls">
+            <div class="carousel-dots" role="tablist" aria-label="Featured project slides">
+              <button class="carousel-dot active" data-index="0" aria-label="Slide 1"></button>
+              <button class="carousel-dot" data-index="1" aria-label="Slide 2"></button>
+              <button class="carousel-dot" data-index="2" aria-label="Slide 3"></button>
+              <button class="carousel-dot" data-index="3" aria-label="Slide 4"></button>
+              <button class="carousel-dot" data-index="4" aria-label="Slide 5"></button>
+            </div>
+            <div class="carousel-nav-btns">
+              <button class="carousel-arrow left" aria-label="Previous slide">&#10094;</button>
+              <button class="carousel-arrow right" aria-label="Next slide">&#10095;</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="work-index">
+        <div class="section-header">
+          <h2 class="section-title">Selected Work</h2>
+          <a href="html/projects.html" class="section-meta">All Projects (09) &rarr;</a>
+        </div>
+        <ul class="index-list">
+          <li class="index-row">
+            <a href="html/projects.html#wishart-ensemble" class="index-link">
+              <span class="index-num">01</span>
+              <span class="index-name">Wishart Ensemble Spectral Density &amp; Combinatorial Maps</span>
+              <span class="index-domain">Random Matrix Theory &rarr;</span>
+            </a>
+          </li>
+          <li class="index-row">
+            <a href="html/projects.html#bayesian-bandits" class="index-link">
+              <span class="index-num">02</span>
+              <span class="index-name">Bayesian Neural Networks in the Bandit Framework</span>
+              <span class="index-domain">Probabilistic ML &rarr;</span>
+            </a>
+          </li>
+          <li class="index-row">
+            <a href="html/projects.html#quarantine-ddos" class="index-link">
+              <span class="index-num">03</span>
+              <span class="index-name">Quarantine Network Dynamics in DDoS Attacks</span>
+              <span class="index-domain">Dynamical Game Theory &rarr;</span>
+            </a>
+          </li>
+          <li class="index-row">
+            <a href="html/projects.html#secured-landing-zone" class="index-link">
+              <span class="index-num">04</span>
+              <span class="index-name">Secured Landing Zone &amp; Hub-Spoke Network Hardening</span>
+              <span class="index-domain">Cloud Architecture &rarr;</span>
+            </a>
+          </li>
+          <li class="index-row">
+            <a href="agent-zoo/index.html" class="index-link">
+              <span class="index-num">05</span>
+              <span class="index-name">Agent Zoo: Autonomous Multi-Agent Spatial &amp; Deception Lab</span>
+              <span class="index-domain">Multi-Agent AI &nearr;</span>
+            </a>
+          </li>
+        </ul>
+      </section>
     </main>
 
-
     <footer>
-      <p>© 2026 Shane Baccas</p>
+      <span>&copy; 2026 Shane Baccas</span>
+      <span>Toronto, Canada</span>
     </footer>
   </div>
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const items = document.querySelectorAll(".carousel-item");
-        const left = document.querySelector(".carousel-arrow.left");
-        const right = document.querySelector(".carousel-arrow.right");
 
-        let current = 0;
-        items[current].classList.add("active");
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const items = document.querySelectorAll(".carousel-item");
+      const dots = document.querySelectorAll(".carousel-dot");
+      const counter = document.getElementById("carousel-counter");
+      const left = document.querySelector(".carousel-arrow.left");
+      const right = document.querySelector(".carousel-arrow.right");
 
-        function updateCarousel(index) {
-          items.forEach(item => item.classList.remove("active"));
-          items[index].classList.add("active");
-        }
+      let current = 0;
 
-        left.addEventListener("click", () => {
-          current = (current - 1 + items.length) % items.length;
-          updateCarousel(current);
+      function updateCarousel(index) {
+        current = (index + items.length) % items.length;
+        items.forEach((item, i) => {
+          item.classList.toggle("active", i === current);
         });
+        dots.forEach((dot, i) => {
+          dot.classList.toggle("active", i === current);
+        });
+        if (counter) {
+          const formatted = String(current + 1).padStart(2, "0");
+          const total = String(items.length).padStart(2, "0");
+          counter.textContent = `${formatted} / ${total}`;
+        }
+      }
 
-        right.addEventListener("click", () => {
-          current = (current + 1) % items.length;
-          updateCarousel(current);
+      left.addEventListener("click", () => updateCarousel(current - 1));
+      right.addEventListener("click", () => updateCarousel(current + 1));
+
+      dots.forEach((dot) => {
+        dot.addEventListener("click", () => {
+          const idx = Number(dot.getAttribute("data-index"));
+          if (!Number.isNaN(idx)) {
+            updateCarousel(idx);
+          }
         });
       });
-    </script>
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowLeft") updateCarousel(current - 1);
+        if (e.key === "ArrowRight") updateCarousel(current + 1);
+      });
+    });
+  </script>
 </body>
 </html>

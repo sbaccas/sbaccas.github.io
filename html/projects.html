@@ -2,134 +2,256 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Projects – Shane Baccas</title>
-  <link rel="stylesheet" href="../css/style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — Shane Baccas</title>
+  <meta name="description" content="Selected mathematical modeling, machine learning, cloud architecture, cybersecurity, and multi-agent AI projects by Shane Baccas." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="stylesheet" href="../css/style.css" />
   <script src="../js/light_toggle.js" defer></script>
-  <script src="../js/include-header.js" defer></script>
 </head>
 <body>
-  <div id="site-header"></div>
+  <header>
+    <a href="../index.html" class="logo-link" aria-label="Shane Baccas Home">
+      <img src="../assets/images/logo2.png" alt="Shane Baccas Logo" class="logo liginvertable" />
+    </a>
+
+    <nav>
+      <button id="light-toggle" class="toggle-btn" aria-label="Toggle Theme">
+        <i class="fas fa-circle-half-stroke"></i>
+        <span>Theme</span>
+      </button>
+      <a href="../index.html">Home</a>
+      <a href="cv.html">CV</a>
+      <a href="projects.html" class="active">Projects</a>
+    </nav>
+
+    <div class="social-links">
+      <a href="https://github.com/sbaccas" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+        <i class="fab fa-github"></i>
+      </a>
+      <a href="https://www.linkedin.com/in/shane-baccas-a96bb0195" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </div>
+  </header>
 
   <div class="page">
     <main>
       <section id="projects">
-        <h2>Projects</h2>
-        <ul>
-          <li id="agent-zoo">
-            <strong>
-              <a href="../agent-zoo/index.html" target="_blank">
-              Agent Zoo (Cat &amp; Mouse): Autonomous Multi-Agent Spatial Reasoning &amp; Deception Lab
+        <div class="page-header">
+          <h1>Projects</h1>
+          <p>Mathematical models, statistical machine learning, cloud security architecture, and autonomous agentic systems.</p>
+        </div>
+
+        <ul class="project-list">
+          <li id="wishart-ensemble" class="project-card">
+            <div class="project-meta-top">
+              <span class="project-tag">Random Matrix Theory · Combinatorics</span>
+              <div class="project-links">
+                <a href="../jupyter/executed_trace.html" target="_blank" rel="noopener noreferrer" class="action-chip" title="Executed Notebook">
+                  <span>Notebook</span>
+                </a>
+                <a href="../assets/pdfs/wishart_ensemble_maps.pdf" target="_blank" rel="noopener noreferrer" class="action-chip" title="Thesis PDF">
+                  <i class="fas fa-file-pdf"></i>
+                  <span>PDF</span>
+                </a>
+                <a href="https://github.com/sbaccas/WignerSimulations" target="_blank" rel="noopener noreferrer" class="action-chip" title="GitHub Repository">
+                  <i class="fab fa-github"></i>
+                  <span>Source</span>
+                </a>
+              </div>
+            </div>
+            <h2 class="project-title">
+              <a href="../jupyter/executed_trace.html" target="_blank" rel="noopener noreferrer">
+                Wishart Ensemble Spectral Density and Combinatorial Maps
               </a>
-            </strong>
-            <a href="../agent-zoo/chronicle_sim_87b6c314_extinction_pact.pdf" target="_blank" class="pdf-link" title="Episode III Forensic Chronicle PDF (18,077-Tick Extinction Pact)">
-              <i class="fas fa-file-pdf"></i>
-            </a>
-            <a href="https://github.com/sbaccas/agent-zoo" target="_blank" class="github-link" title="GitHub Repository">
-              <i class="fab fa-github"></i>
-            </a><br>
-            An authoritative 100×100 discrete 2D grid laboratory built with Google ADK, Gemini 2.5 Flash on Vertex AI, Model Context Protocol (MCP), and Agent-to-Agent (A2A) radio—testing whether frontier LLMs can invent spatial geometry (lawnmower sweeps, central trapdoor webs), dual-brain coaching strategies, and game-theoretic alliances or betrayals purely from Markdown skill manuals.
+            </h2>
+            <p class="project-desc">
+              A deep dive into random matrix theory and enumerative combinatorics, formalized in my Queen’s math thesis.
+            </p>
           </li>
-          <li>
-            <strong>
-              <a href="../jupyter/executed_trace.html" target="_blank">
-              Wishart Ensemble Spectral Density and Combinatorial Maps
+
+          <li id="bayesian-bandits" class="project-card">
+            <div class="project-meta-top">
+              <span class="project-tag">Bayesian Machine Learning · Bandits</span>
+              <div class="project-links">
+                <a href="../assets/pdfs/uncertainty_bandits.pdf" target="_blank" rel="noopener noreferrer" class="action-chip" title="Paper PDF">
+                  <i class="fas fa-file-pdf"></i>
+                  <span>PDF</span>
+                </a>
+                <a href="https://github.com/esdu/csc2541_project" target="_blank" rel="noopener noreferrer" class="action-chip" title="GitHub Repository">
+                  <i class="fab fa-github"></i>
+                  <span>Source</span>
+                </a>
+              </div>
+            </div>
+            <h2 class="project-title">
+              <a href="../assets/pdfs/uncertainty_bandits.pdf" target="_blank" rel="noopener noreferrer">
+                Bayesian Neural Networks: Uncertainty-Guided Recommendation in the Bandit Framework
               </a>
-            </strong>
-            <a href="../assets/pdfs/wishart_ensemble_maps.pdf" target="_blank" class="pdf-link">
-              <i class="fas fa-file-pdf"></i>
-            </a>
-            <a href="https://github.com/sbaccas/WignerSimulations" target="_blank" class="github-link">
-              <i class="fab fa-github"></i>
-            </a><br>
-            A deep dive into random matrix theory and enumerative combinatorics, formalized in my Queen’s math thesis.
+            </h2>
+            <p class="project-desc">
+              A framework combining machine learning with exploration-exploitation trade-offs in online recommendation.
+            </p>
           </li>
-          <li>
-            <strong>
-              <a href="../assets/pdfs/uncertainty_bandits.pdf" target="_blank">
-              Bayesian Neural Networks: Uncertainty-Guided Recommendation in the Bandit Framework
+
+          <li id="misinformation-control" class="project-card">
+            <div class="project-meta-top">
+              <span class="project-tag">Control Theory · Network Dynamics</span>
+              <div class="project-links">
+                <a href="https://github.com/sbaccas" target="_blank" rel="noopener noreferrer" class="action-chip" title="GitHub Profile">
+                  <i class="fab fa-github"></i>
+                  <span>GitHub</span>
+                </a>
+              </div>
+            </div>
+            <h2 class="project-title">
+              Misinformation Dynamics and Control
+            </h2>
+            <p class="project-desc">
+              Investigating control-theoretic interventions to reduce the spread and impact of misinformation in networks.
+            </p>
+          </li>
+
+          <li id="quarantine-ddos" class="project-card">
+            <div class="project-meta-top">
+              <span class="project-tag">Dynamical Game Theory · Network Security</span>
+              <div class="project-links">
+                <a href="../assets/pdfs/quarantine_ddos.pdf" target="_blank" rel="noopener noreferrer" class="action-chip" title="Paper PDF">
+                  <i class="fas fa-file-pdf"></i>
+                  <span>PDF</span>
+                </a>
+                <a href="https://github.com/sbaccas" target="_blank" rel="noopener noreferrer" class="action-chip" title="GitHub Profile">
+                  <i class="fab fa-github"></i>
+                  <span>GitHub</span>
+                </a>
+              </div>
+            </div>
+            <h2 class="project-title">
+              <a href="../assets/pdfs/quarantine_ddos.pdf" target="_blank" rel="noopener noreferrer">
+                Quarantine Network Dynamics in DDoS Attacks
               </a>
-            </strong>
-            <a href="../assets/pdfs/uncertainty_bandits.pdf" target="_blank" class="pdf-link">
-              <i class="fas fa-file-pdf"></i>
-            </a>
-            <a href="https://github.com/esdu/csc2541_project" target="_blank" class="github-link">
-              <i class="fab fa-github"></i>
-            </a><br>
-            A framework combining Machine learning with exploration-exploitation trade-offs in online recommendation.
+            </h2>
+            <p class="project-desc">
+              A dynamical game-theory-based model for automated, cost-aware quarantining in response to distributed attacks.
+            </p>
           </li>
-          <li>
-            <strong>
-            <a href="../assets/pdfs/misinformation_control.pdf" target="_blank">
-             Misinformation Dynamics and Control</strong>
-            </a>
-            <a href="../assets/pdfs/misinformation_control.pdf" target="_blank" class="pdf-link">
-              <i class="fas fa-file-pdf"></i>
-            </a>
-            <a href="https://github.com/shanebaccas/misinformation-control" target="_blank" class="github-link">
-              <i class="fab fa-github"></i>
-            </a><br>
-            Investigating control-theoretic interventions to reduce the spread and impact of misinformation in networks.
-          </li>
-          <li>
-            <strong>
-            <a href="../assets/pdfs/quarantine_ddos.pdf"  target="_blank">
-            Quarantine Network Dynamics in DDoS Attacks
-            </a>
-            </strong>
-            <a href="../assets/pdfs/quarantine_ddos.pdf" target="_blank" class="pdf-link">
-              <i class="fas fa-file-pdf"></i>
-            </a>
-            <a href="https://github.com/shanebaccas/ddos-quarantine" target="_blank" class="github-link">
-              <i class="fab fa-github"></i>
-            </a><br>
-            A dynamical game-theory-based model for automated, cost-aware quarantining in response to distributed attacks.
-          </li>
-          <li>
-            <strong>AzSecuredLandingZone-Lab</strong>
-            <a href="#" target="_blank" class="pdf-link">
-              <i class="fas fa-file-pdf"></i>
-            </a>
-            <a href="https://github.com/shanebaccas/AzSecuredLandingZone-Lab" target="_blank" class="github-link">
-              <i class="fab fa-github"></i>
-            </a><br>
-            A lab project demonstrating secure Azure Landing Zone provisioning with identity segmentation, AVNM, and NSG hardening.
-          </li>
-          <li>
-            <strong>AzDDoS-SimulatorLab</strong>
-            <a href="#" target="_blank" class="pdf-link">
-              <i class="fas fa-file-pdf"></i>
-            </a>
-            <a href="https://github.com/shanebaccas/AzDDoS-SimulatorLab" target="_blank" class="github-link">
-              <i class="fab fa-github"></i>
-            </a><br>
-            A high-intensity network simulation for modeling, testing, and tuning Azure DDoS Protection in a virtual lab environment.
-          </li>
-          <li>
-            <strong>
-              <a href="https://github.com/sbaccas/dockerPython" target="_blank">
-                Containerized Azure Function Python Workflow with Docker
-              </a>
-              <a href="https://github.com/sbaccas/dockerPython" target="_blank" class="github-link">
-                <i class="fab fa-github"></i>
-            </strong></a><br>
-            A lightweight template for rapidly building and testing Containerized Azure Python Function. Extremely useful serverless workhorses for CyberSecurity DevOps automation etc. Quick to deploy and cost efficient.
-          </li>
-          <li>
-            <strong>
-              <a href="https://cognit.ca/en/project/50344" target="_blank">
+
+          <li id="museum-meshes" class="project-card">
+            <div class="project-meta-top">
+              <span class="project-tag">Computational Geometry · 3D Meshes</span>
+              <div class="project-links">
+                <a href="../assets/pdfs/Software%20support%20for%20high%20quality%20meshes%20of%20museum%20specimens%20-%20University%20Undergraduate%20Student%20Research%20Awards.pdf" target="_blank" rel="noopener noreferrer" class="action-chip" title="Research Award Overview PDF">
+                  <i class="fas fa-file-pdf"></i>
+                  <span>PDF</span>
+                </a>
+                <a href="https://cognit.ca/en/project/50344" target="_blank" rel="noopener noreferrer" class="action-chip" title="Cognit.ca Project Record">
+                  <span>Grant Record &nearr;</span>
+                </a>
+              </div>
+            </div>
+            <h2 class="project-title">
+              <a href="https://cognit.ca/en/project/50344" target="_blank" rel="noopener noreferrer">
                 Software Support for High Quality Meshes of Museum Specimens
               </a>
-            </strong><br>
-            Contributed to the design and development of tooling for generating and processing ultra-detailed 3D meshes of museum artifacts and biological specimens to support research, archiving, and public access.
+            </h2>
+            <p class="project-desc">
+              Contributed to the design and development of tooling for generating and processing ultra-detailed 3D meshes of museum artifacts and biological specimens to support research, archiving, and public access.
+            </p>
+          </li>
+
+          <li id="secured-landing-zone" class="project-card">
+            <div class="project-meta-top">
+              <span class="project-tag">Cloud Architecture · Zero Trust</span>
+              <div class="project-links">
+                <a href="https://github.com/sbaccas" target="_blank" rel="noopener noreferrer" class="action-chip" title="GitHub Profile">
+                  <i class="fab fa-github"></i>
+                  <span>GitHub</span>
+                </a>
+              </div>
+            </div>
+            <h2 class="project-title">
+              AzSecuredLandingZone-Lab
+            </h2>
+            <p class="project-desc">
+              A lab project demonstrating secure Azure Landing Zone provisioning with identity segmentation, AVNM, and NSG hardening.
+            </p>
+          </li>
+
+          <li id="ddos-simulator" class="project-card">
+            <div class="project-meta-top">
+              <span class="project-tag">Cloud Security · Network Simulation</span>
+              <div class="project-links">
+                <a href="https://github.com/sbaccas" target="_blank" rel="noopener noreferrer" class="action-chip" title="GitHub Profile">
+                  <i class="fab fa-github"></i>
+                  <span>GitHub</span>
+                </a>
+              </div>
+            </div>
+            <h2 class="project-title">
+              AzDDoS-SimulatorLab
+            </h2>
+            <p class="project-desc">
+              A high-intensity network simulation for modeling, testing, and tuning Azure DDoS Protection in a virtual lab environment.
+            </p>
+          </li>
+
+          <li id="docker-python" class="project-card">
+            <div class="project-meta-top">
+              <span class="project-tag">Serverless · DevOps Automation</span>
+              <div class="project-links">
+                <a href="https://github.com/sbaccas/dockerPython" target="_blank" rel="noopener noreferrer" class="action-chip" title="GitHub Repository">
+                  <i class="fab fa-github"></i>
+                  <span>Source</span>
+                </a>
+              </div>
+            </div>
+            <h2 class="project-title">
+              <a href="https://github.com/sbaccas/dockerPython" target="_blank" rel="noopener noreferrer">
+                Containerized Azure Function Python Workflow with Docker
+              </a>
+            </h2>
+            <p class="project-desc">
+              A lightweight template for rapidly building and testing containerized Azure Python Functions. Extremely useful serverless workhorses for cybersecurity and DevOps automation—quick to deploy and cost-efficient.
+            </p>
+          </li>
+
+          <li id="agent-zoo" class="project-card">
+            <div class="project-meta-top">
+              <span class="project-tag">Multi-Agent AI · ADK · Spatial Reasoning</span>
+              <div class="project-links">
+                <a href="../agent-zoo/index.html" class="action-chip" title="Open Interactive Lab Showcase">
+                  <span>Lab Showcase</span>
+                </a>
+                <a href="../agent-zoo/agent_zoo_readme.pdf" target="_blank" rel="noopener noreferrer" class="action-chip" title="Repository Markdown Documentation PDF">
+                  <i class="fas fa-file-pdf"></i>
+                  <span>PDF</span>
+                </a>
+                <a href="https://github.com/sbaccas/agent-zoo" target="_blank" rel="noopener noreferrer" class="action-chip" title="GitHub Repository">
+                  <i class="fab fa-github"></i>
+                  <span>Source</span>
+                </a>
+              </div>
+            </div>
+            <h2 class="project-title">
+              <a href="../agent-zoo/index.html">
+                Agent Zoo (Cat &amp; Mouse): Autonomous Multi-Agent Spatial Reasoning &amp; Deception Lab
+              </a>
+            </h2>
+            <p class="project-desc">
+              An authoritative 100&times;100 discrete 2D grid laboratory built with Google ADK, Gemini 2.5 Flash on Vertex AI, Model Context Protocol (MCP), and Agent-to-Agent (A2A) radio—testing whether frontier LLMs can invent spatial geometry (lawnmower sweeps, central trapdoor webs), dual-brain coaching strategies, and game-theoretic alliances or betrayals purely from Markdown skill manuals.
+            </p>
           </li>
         </ul>
       </section>
     </main>
 
     <footer>
-      <p>© 2026 Shane Baccas</p>
+      <span>&copy; 2026 Shane Baccas</span>
+      <span>Toronto, Canada</span>
     </footer>
   </div>
 </body>

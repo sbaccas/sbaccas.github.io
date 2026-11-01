@@ -2,67 +2,161 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CV – Shane Baccas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CV — Shane Baccas</title>
+  <meta name="description" content="Curriculum Vitae of Shane Baccas." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
   <link rel="stylesheet" href="../css/style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <script src="../js/light_toggle.js" defer></script>
-  <script src="../js/include-header.js" defer></script>
 </head>
 <body>
-  <div id="site-header"></div>
+  <header>
+    <a href="../index.html" class="logo-link" aria-label="Shane Baccas Home">
+      <img src="../assets/images/logo2.png" alt="Shane Baccas Logo" class="logo liginvertable" />
+    </a>
+
+    <nav>
+      <button id="light-toggle" class="toggle-btn" aria-label="Toggle Theme">
+        <i class="fas fa-circle-half-stroke"></i>
+        <span>Theme</span>
+      </button>
+      <a href="../index.html">Home</a>
+      <a href="cv.html" class="active">CV</a>
+      <a href="projects.html">Projects</a>
+    </nav>
+
+    <div class="social-links">
+      <a href="https://github.com/sbaccas" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+        <i class="fab fa-github"></i>
+      </a>
+      <a href="https://www.linkedin.com/in/shane-baccas-a96bb0195" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </div>
+  </header>
 
   <div class="page">
     <main>
-    <section id="cv">
-        <h2>Curriculum Vitae</h2>
+      <section id="cv">
+        <div class="page-header">
+          <h1>Curriculum Vitae</h1>
+        </div>
 
-        <h3>Education</h3>
-        <ul>
-        <li><strong>Juris Doctor (J.D.)</strong> — University of Toronto, Faculty of Law</li>
-        <li><strong>M.Sc. in Pure Mathematics</strong>  Queen's University (Thesis authored and defended)</li>
-        <li><strong>M.Sc. in Mathematics</strong> — University of Toronto (Masters coursework)</li>
-        <li><strong>B.Sc.H in Pure Mathematics & Comp Sci</strong> — Queen’s University</li>
-        </ul>
+        <div class="cv-section">
+          <h2>Education</h2>
+          <ul class="edu-list">
+            <li class="edu-item">
+              <span class="edu-degree">Juris Doctor (J.D.)</span>
+              <span class="edu-school">University of Toronto, Faculty of Law</span>
+            </li>
+            <li class="edu-item">
+              <span class="edu-degree">M.Sc. in Pure Mathematics</span>
+              <span class="edu-school">Queen’s University (Thesis authored &amp; defended)</span>
+            </li>
+            <li class="edu-item">
+              <span class="edu-degree">M.Sc. in Mathematics</span>
+              <span class="edu-school">University of Toronto (Master’s coursework)</span>
+            </li>
+            <li class="edu-item">
+              <span class="edu-degree">B.Sc.H in Pure Mathematics &amp; Comp Sci</span>
+              <span class="edu-school">Queen’s University</span>
+            </li>
+          </ul>
+        </div>
 
-        <h3>Certifications</h3>
-        <ul>
-          <li>Google Cloud Professional Cloud Architect (PCA)</li>
-          <li>Azure Solutions Architect Expert (AZ-305)</li>
-          <li>Azure DevOps Engineer Expert (AZ-400)</li>
-          <li>Azure Security Engineer Associate (AZ-500)</li>
-          <li>Azure Developer Associate (AZ-204)</li>
-          <li>Azure Network Engineer Associate (AZ-700)</li>
-          <li>Azure Administrator Associate (AZ-104)</li>
-          <li>HashiCorp Certified: Terraform Associate</li>
-        </ul>
+        <div class="cv-section">
+          <h2>Certifications</h2>
+          <ul class="cert-grid">
+            <li class="cert-item">
+              <span>Google Cloud Professional Cloud Architect</span>
+              <span class="cert-code">GCP-PCA</span>
+            </li>
+            <li class="cert-item">
+              <span>Azure Solutions Architect Expert</span>
+              <span class="cert-code">AZ-305</span>
+            </li>
+            <li class="cert-item">
+              <span>Azure DevOps Engineer Expert</span>
+              <span class="cert-code">AZ-400</span>
+            </li>
+            <li class="cert-item">
+              <span>Azure Security Engineer Associate</span>
+              <span class="cert-code">AZ-500</span>
+            </li>
+            <li class="cert-item">
+              <span>Azure Network Engineer Associate</span>
+              <span class="cert-code">AZ-700</span>
+            </li>
+            <li class="cert-item">
+              <span>Azure Developer Associate</span>
+              <span class="cert-code">AZ-204</span>
+            </li>
+            <li class="cert-item">
+              <span>Azure Administrator Associate</span>
+              <span class="cert-code">AZ-104</span>
+            </li>
+            <li class="cert-item">
+              <span>HashiCorp Certified: Terraform Associate</span>
+              <span class="cert-code">IaC</span>
+            </li>
+          </ul>
+        </div>
 
+        <div class="cv-section">
+          <h2>Key Capabilities</h2>
+          <div class="skills-grid">
+            <div class="skill-row">
+              <span class="skill-domain">Cloud Architecture</span>
+              <span class="skill-items">Google Cloud Platform (GCP), Microsoft Azure, hybrid/multi-cloud architecture, Kubernetes, Terraform, ARM/Bicep, Cloud Run, GKE, AKS, serverless architecture, VPC/network architecture</span>
+            </div>
+            <div class="skill-row">
+              <span class="skill-domain">AI &amp; Agentic Systems</span>
+              <span class="skill-items">Gemini Enterprise, Gemini Enterprise Agent Platform, Agent Development Kit (ADK), LangChain, LangGraph, LLM agents, multi-agent systems, RAG, context &amp; memory architectures, MCP/A2A, tool calling, vector databases, embeddings, evaluation &amp; observability</span>
+            </div>
+            <div class="skill-row">
+              <span class="skill-domain">Infrastructure &amp; DevOps</span>
+              <span class="skill-items">Terraform, Kubernetes/AKS/GKE, Argo CD, GitHub Actions, Azure DevOps, CI/CD, Infrastructure as Code, Docker, Git, Linux, Python</span>
+            </div>
+            <div class="skill-row">
+              <span class="skill-domain">Security, Identity &amp; Compliance</span>
+              <span class="skill-items">IAM, identity federation, SSO, SCIM provisioning/integrations, Active Directory, AD FS, SAML 2.0, OAuth 2.0, OpenID Connect (OIDC), Zero Trust, Sentinel, Defender, threat modeling, NIST, MITRE ATT&amp;CK, CIS Controls, SOC 2, PCI DSS, PIPEDA, privacy &amp; regulatory compliance</span>
+            </div>
+            <div class="skill-row">
+              <span class="skill-domain">Web Development</span>
+              <span class="skill-items">Python, Flask, Django, FastAPI, REST APIs, WebSockets, JavaScript, TypeScript, React, SQL, asynchronous processing, event-driven architecture, microservices</span>
+            </div>
+            <div class="skill-row">
+              <span class="skill-domain">Mathematics</span>
+              <span class="skill-items">Differential Geometry, Algebraic Topology, Analysis, Abstract Algebra, Random Matrix Theory, LaTeX, Maple, Mathematica</span>
+            </div>
+          </div>
+        </div>
 
-        <h3>Key Skills</h3>
-        <ul>
-        <li><strong>Cloud Architecture:</strong> Google Cloud Platform (GCP), Microsoft Azure, hybrid/multi-cloud architecture, Kubernetes, Terraform, ARM/Bicep, Cloud Run, GKE, AKS, serverless architecture, VPC/network architecture</li>
-        <li><strong>AI & Agentic Systems:</strong> Gemini Enterprise, Gemini Enterprise Agent Platform, Agent Development Kit (ADK), LLM agents, multi-agent systems, RAG, context and memory architectures, MCP/A2A, tool calling, vector databases, embeddings, evaluation/observability</li>
-        <li><strong>Infrastructure & DevOps:</strong> Terraform, Kubernetes/AKS/GKE, Argo CD, GitHub Actions, Azure DevOps, CI/CD, Infrastructure as Code, Docker, Git, Linux, Python</li>
-        <li><strong>Cloud Security, Identity & Compliance:</strong> IAM, identity federation, SSO, SCIM provisioning/integrations, Active Directory, AD FS, SAML 2.0, OAuth 2.0, OpenID Connect (OIDC), Zero Trust, Sentinel, Defender, threat modeling, NIST, MITRE ATT&CK, CIS Controls, SOC 2, PCI DSS, PIPEDA, privacy and regulatory compliance</li>
-        <li><strong>Web Development:</strong> Python, Flask, Django, FastAPI, REST APIs, WebSockets, JavaScript, TypeScript, React, SQL, asynchronous processing, event-driven architecture, microservices</li>
-        <li><strong>Mathematics:</strong> Differential Geometry, Algebraic Topology, Analysis, Abstract Algebra, Random Matrix Theory, LaTeX, Maple, Mathematica</li>
-        </ul>
-
-        <h3>Experience</h3>
-        <p>
-        Over a decade of experience delivering cloud-native solutions across industries, including infrastructure design, hybrid networking, database architecture, ETL pipelines, DevOps automation, and software delivery lifecycle management. Deep expertise in security frameworks including NIST, MITRE ATT&CK, CIS, and Zero Trust architecture, with hands-on leadership in cloud security engineering, incident response, threat modeling, and compliance hardening.
-        </p>
-
-        <p>
-        📄 <a href="../assets/pdfs/ShaneBaccasCV.pdf" target="_blank">Download Full CV (PDF)</a>
-        </p>
-    </section>
+        <div class="cv-actions">
+          <button type="button" class="btn-minimal" id="print-cv-btn">
+            <i class="fas fa-print"></i>
+            <span>Print / Save as PDF</span>
+          </button>
+        </div>
+      </section>
     </main>
 
-
     <footer>
-      <p>© 2026 Shane Baccas</p>
+      <span>&copy; 2026 Shane Baccas</span>
+      <span>Toronto, Canada</span>
     </footer>
   </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const printBtn = document.getElementById("print-cv-btn");
+      if (printBtn) {
+        printBtn.addEventListener("click", () => window.print());
+      }
+    });
+  </script>
 </body>
 </html>
