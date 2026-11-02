@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dynatrace + Google Cloud Observability — Shane Baccas</title>
+  <meta name="description" content="Turnkey enterprise reference architecture and Terraform/Helm automation suite for integrating a Dynatrace tenant with a Google Cloud Organization across Logs, Metrics, and Traces." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <script src="../js/light_toggle.js" defer></script>
+  <style>
+    .dt-section {
+      margin-top: 2.75rem;
+    }
+
+    .dt-section h2 {
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .dt-prose {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.68;
+      margin-bottom: 1.25rem;
+    }
+
+    .arch-viewer {
+      background-color: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      border-radius: 5px;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+
+    .arch-stage-img {
+      width: 100%;
+      display: block;
+      cursor: zoom-in;
+      border-bottom: 1px solid var(--border-color);
+      background-color: #050505;
+    }
+
+    .spec-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .spec-row {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 1.25rem;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border-color);
+      align-items: baseline;
+    }
+
+    .spec-label {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-color);
+    }
+
+    .spec-detail {
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    .spec-detail code,
+    .dt-prose code,
+    .project-desc code {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--text-color);
+      background-color: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      padding: 0.08rem 0.35rem;
+      border-radius: 3px;
+    }
+
+    /* Console & Code Blueprint Viewer */
+    .console-viewer {
+      background-color: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .console-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border-color);
+      background-color: var(--bg-color);
+    }
+
+    .console-tab {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+      background: transparent;
+      border: 1px solid var(--border-color);
+      padding: 0.3rem 0.6rem;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .console-tab:hover {
+      color: var(--text-color);
+      border-color: var(--border-strong);
+    }
+
+    .console-tab.active {
+      color: var(--bg-color);
+      background-color: var(--text-color);
+      border-color: var(--text-color);
+    }
+
+    .code-panel {
+      display: none;
+    }
+
+    .code-panel.active {
+      display: block;
+    }
+
+    .code-block {
+      background-color: var(--bg-elevated);
+      padding: 1.1rem 1.25rem;
+      overflow-x: auto;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .console-meta {
+      padding: 0.9rem 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      background-color: var(--bg-color);
+    }
+
+    .console-title {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text-color);
+    }
+
+    .console-port {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      color: var(--text-muted);
+    }
+
+    .console-desc {
+      color: var(--text-secondary);
+      font-size: 0.86rem;
+      line-height: 1.5;
+      padding: 0 1.25rem 0.95rem;
+      background-color: var(--bg-color);
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.92);
+      z-index: 999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      cursor: zoom-out;
+    }
+
+    .lightbox.open {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-width: 95vw;
+      max-height: 92vh;
+      border: 1px solid var(--border-strong);
+      border-radius: 4px;
+      background: #050505;
+    }
+
+    @media (max-width: 820px) {
+      .spec-row {
+        grid-template-columns: 1fr;
+        gap: 0.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="../index.html" class="logo-link" aria-label="Shane Baccas Home">
+      <img src="../assets/images/logo2.png" alt="Shane Baccas Logo" class="logo liginvertable" />
+    </a>
+
+    <nav>
+      <button id="light-toggle" class="toggle-btn" aria-label="Toggle Theme">
+        <i class="fas fa-circle-half-stroke"></i>
+        <span>Theme</span>
+      </button>
+      <a href="../index.html">Home</a>
+      <a href="../html/cv.html">CV</a>
+      <a href="../html/projects.html" class="active">Projects</a>
+    </nav>
+
+    <div class="social-links">
+      <a href="https://github.com/sbaccas" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+        <i class="fab fa-github"></i>
+      </a>
+      <a href="https://www.linkedin.com/in/shane-baccas-a96bb0195" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </div>
+  </header>
+
+  <div class="page">
+    <main>
+      <div class="page-header">
+        <div class="project-meta-top" style="margin-bottom: 0.65rem;">
+          <span class="project-tag">Cloud Observability · GCP · Dynatrace · OpenTelemetry</span>
+          <div class="project-links">
+            <a href="https://github.com/sbaccas/dynatrace-on-gcp" target="_blank" rel="noopener noreferrer" class="action-chip" title="GitHub Repository">
+              <i class="fab fa-github"></i>
+              <span>Source</span>
+            </a>
+          </div>
+        </div>
+        <h1>Dynatrace + Google Cloud: Enterprise Full-Stack Observability</h1>
+        <p style="margin-top: 0.4rem;">
+          A <strong>turnkey infrastructure-as-code solution</strong> (Terraform, Helm, Packer, and bash automation) that integrates a <strong>Dynatrace SaaS tenant</strong> with an enterprise <strong>Google Cloud Organization</strong> to collect <strong>Logs</strong>, <strong>Metrics</strong>, and <strong>Distributed Traces</strong> across four architectural levels.
+        </p>
+      </div>
+
+      <!-- Section 1: The Three Core Telemetry Data Types in Google Cloud -->
+      <section class="dt-section" style="margin-top: 0;">
+        <h2>01 · The Three Core Telemetry Data Types in Google Cloud</h2>
+        <p class="dt-prose">
+          Observability across cloud infrastructure and distributed applications depends on three foundational telemetry signals. Architecting collection across a Google Cloud Organization begins with understanding what each data type captures and where it originates:
+        </p>
+
+        <ul class="spec-list">
+          <li class="spec-row">
+            <span class="spec-label">01 · Logs (Discrete Events)</span>
+            <span class="spec-detail">
+              Immutable, timestamped text or structured JSON records emitted when a discrete event occurs in cloud control planes or application code—such as GCP Cloud Audit Logs (<code>cloudaudit.googleapis.com</code>), VPC Flow Logs, Firewall Rules Logs, Cloud NAT Logs, and container <code>stdout</code>/<code>stderr</code> stack traces. Stored schema-on-read in <strong>Dynatrace Grail</strong> and correlated with active traces via <code>trace_id</code> and <code>span_id</code>.
+            </span>
+          </li>
+          <li class="spec-row">
+            <span class="spec-label">02 · Metrics (Time-Series)</span>
+            <span class="spec-detail">
+              Aggregated numerical measurements sampled at regular intervals to quantify utilization, throughput, saturation, and error rates—such as GCE/GKE CPU &amp; memory, Pub/Sub unacknowledged backlog, AlloyDB / Cloud SQL / BigQuery utilization, HTTP p95/p99 latency, and Vertex AI Gemini token consumption. Evaluated continuously by Dynatrace's proprietary <strong>Davis Causal AI</strong> engine, which combines time-series baselines with the real-time <strong>Smartscape</strong> dependency graph for deterministic root-cause analysis.
+            </span>
+          </li>
+          <li class="spec-row">
+            <span class="spec-label">03 · Traces (Request Spans)</span>
+            <span class="spec-detail">
+              End-to-end distributed execution waterfalls composed of nested causal spans (<code>trace_id</code> / <code>span_id</code>) tracking a single request as it hops across load balancers, Cloud Run services, GCE VMs, AlloyDB SQL queries, and Google ADK multi-agent tool calls. Unifies zero-code OneAgent <strong>PurePaths</strong> with <strong>OpenTelemetry (OTel)</strong> spans.
+            </span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Section 2: Multi-Level Integration Architecture -->
+      <section class="dt-section">
+        <h2>02 · Multi-Level Integration Architecture Across a GCP Organization</h2>
+
+        <div class="arch-viewer">
+          <div class="console-tabs" id="archTabs">
+            <button class="console-tab active" data-src="../assets/images/dynatrace_gcp_arch.svg" data-mode="lucid-dark" data-title="Enterprise Dynatrace + GCP Integration Topology (Lucidchart Style)" data-desc="Full-organization vector diagram: Cloud Sinks, Isolated GKE Log/Metric Forwarders, Scoping Project (1:375), Workload VPC ActiveGates, Packer Golden Images, and OTel SDK.">Enterprise Integration Topology</button>
+            <button class="console-tab" data-src="assets/dynatrace_gcp_tiers.svg" data-mode="tiers" data-title="4-Tier Stacked Architecture Blueprint (Vector SVG)" data-desc="Layered 4-tier view: Level 1 Platform Sinks & Scoping Projects -> Level 2 Multi-Zone ActiveGate Cluster -> Level 3 OneAgent VMs -> Level 4 OpenTelemetry Serverless & AI Agents.">4-Tier Stacked Blueprint</button>
+          </div>
+
+          <img id="archImg" src="../assets/images/dynatrace_gcp_arch.svg" alt="Dynatrace and Google Cloud Multi-Level Full-Stack Observability Architecture" class="arch-stage-img invertable zoomable" />
+
+          <div class="console-meta">
+            <span id="archTitle" class="console-title">Enterprise Dynatrace + GCP Integration Topology (Lucidchart Style)</span>
+            <span class="console-port">Click diagram to enlarge</span>
+          </div>
+          <p id="archDesc" class="console-desc">
+            Full-organization vector diagram: Cloud Sinks, Isolated GKE Log/Metric Forwarders, Scoping Project (1:375), Workload VPC ActiveGates, Packer Golden Images, and OTel SDK.
+          </p>
+        </div>
+
+        <ul class="spec-list">
+          <li class="spec-row">
+            <span class="spec-label">Level 1 · Platform Sinks &amp; Scoping (Isolated GKE)</span>
+            <span class="spec-detail">
+              <strong>Baseline Logs &amp; Metrics:</strong> A Folder/Organization Cloud Logging Sink configured with <code>include_children = true</code> routes platform and audit logs across all child projects into a central Cloud Pub/Sub buffer (<code>dynatrace-logs-sub</code>), pulled by a KEDA-autoscaled <strong>Log Forwarder</strong> on an isolated private GKE Autopilot cluster (while security logs can split via Organization Sink to <strong>Cortex / Wiz &amp; Security Command Center</strong>). In parallel, workload projects attach via <code>google_monitoring_monitored_project</code> to a central <strong>Cloud Monitoring Scoping Project</strong> polled by the GKE <strong>Metric Forwarder</strong> across 150+ GCP APIs via Workload Identity—requiring zero VPC peering into workload networks.
+            </span>
+          </li>
+          <li class="spec-row">
+            <span class="spec-label">Level 2 · Regional ActiveGate Cluster &amp; PaaS Extensions</span>
+            <span class="spec-detail">
+              <strong>In-VPC Proxy &amp; PaaS Telemetry:</strong> Multi-zone GCE VMs listening on TCP <code>:9999</code> inside a dedicated subnet with Private Google Access and Cloud NAT egress. Registered to a regional Dynatrace Network Zone (<code>gcp.&lt;region&gt;.&lt;env&gt;</code>) for automatic client-side failover. Runs <strong>Dynatrace Hub Extensions</strong> to privately poll managed GCP PaaS databases (<strong>AlloyDB for PostgreSQL</strong>, <strong>Cloud SQL</strong>, <strong>BigQuery</strong>, Spanner) where OS SSH access is impossible.
+            </span>
+          </li>
+          <li class="spec-row">
+            <span class="spec-label">Level 3 · Compute VMs (Linux &amp; Windows OneAgent)</span>
+            <span class="spec-detail">
+              <strong>Full-Stack Host Metrics, Logs &amp; PurePath Traces:</strong> Dynatrace <strong>OneAgent</strong> deployed on Linux and Windows GCE VMs captures OS metrics, process topology (Smartscape), application log files, and bytecode-injected <strong>PurePath distributed traces</strong> without code changes. All traffic is proxied privately over VPC TCP <code>:9999</code> through the regional ActiveGate cluster. VMs are provisioned from our <strong>Packer Golden Image Factory</strong>—effectively born with the OneAgent runtime pre-baked and a first-boot <code>systemd</code> metadata hook that binds the regional Network Zone in milliseconds.
+            </span>
+          </li>
+          <li class="spec-row">
+            <span class="spec-label">Level 4 · Serverless, Cloud Run &amp; AI Agents (OTel SDK)</span>
+            <span class="spec-detail">
+              <strong>Application-Level OpenTelemetry Traces, Metrics &amp; Logs:</strong> For ephemeral serverless containers (<strong>Cloud Run</strong>, App Engine, Cloud Functions) and <strong>Google ADK / Vertex AI Gemini AI Agents</strong> where kernel/host agents cannot be installed, applications instrument code using the standard <strong>OpenTelemetry (OTel) SDK</strong> (<code>OTLPSpanExporter</code> / <code>OTLPMetricExporter</code>)—or containerized OneAgent in the Docker image—and export W3C TraceContext spans and delta metrics directly to Dynatrace (<code>/api/v2/otlp/v1/traces</code>).
+            </span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Section 3: Enterprise Scale & Organization Governance -->
+      <section class="dt-section">
+        <h2>03 · Enterprise Scale &amp; Organization Governance</h2>
+        <ul class="project-list">
+          <li class="project-card">
+            <div class="project-meta-top">
+              <span class="project-tag">Quota Sharding · 1 : 375 Scoping Cap</span>
+            </div>
+            <h3 class="project-title">Overcoming GCP's 375-Project Cloud Monitoring Limit via Secure Tags</h3>
+            <p class="project-desc">
+              Google Cloud enforces a hard quota of <strong>375 Monitored Projects per Cloud Monitoring Scoping Project</strong>. To scale across thousands of GCP projects, this architecture uses GCP Organization Secure Tags (<code>observability-shard = shard-1, shard-2, ...</code>) to deterministically partition workload projects across multiple Scoping Projects (<code>obs-scoping-shard-N</code>), each paired with an isolated Helm Metric Forwarder deployment.
+            </p>
+          </li>
+
+          <li class="project-card">
+            <div class="project-meta-top">
+              <span class="project-tag">Org Policy Guardrails · CI/CD Project Factory</span>
+            </div>
+            <h3 class="project-title">Preventative Custom Organization Policies &amp; Zero-Touch Onboarding</h3>
+            <p class="project-desc">
+              Enforces two custom Organization Policies at the Folder level: blocking creation of any GCP project lacking an <code>observability-shard</code> tag binding, and mandating a dedicated <code>*-activegate-sub</code> subnet in every enterprise workload VPC. Paired with a GitHub Actions Project Factory pipeline that binds new projects to the active Scoping Shard within 60 seconds of provisioning.
+            </p>
+          </li>
+
+          <li class="project-card">
+            <div class="project-meta-top">
+              <span class="project-tag">Immutable Infrastructure · Packer + systemd</span>
+            </div>
+            <h3 class="project-title">Packer Golden Image Factory vs. Boot-Time Startup Scripts</h3>
+            <p class="project-desc">
+              Eliminates 45–90 seconds of boot-time installer downloads during Managed Instance Group autoscaling events by pre-baking the OneAgent binary into hardened Ubuntu/Windows Golden Images (<code>--set-network-zone=default</code>) and executing a lightweight <code>systemd</code> first-boot unit (<code>dynatrace-zone-config.service</code>) that queries GCE instance metadata to bind <code>--set-network-zone=gcp.&lt;region&gt;.&lt;env&gt;</code>.
+            </p>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Section 4: Turnkey Deployment & Implementation Blueprints -->
+      <section class="dt-section">
+        <h2>04 · Turnkey Bootstrap Assumptions &amp; Implementation Blueprints</h2>
+        <p class="dt-prose">
+          The repository is designed as a <strong>turnkey deployment suite</strong> driven by a single local configuration file (<code>bootstrap/bootstrap.env</code>). Before running <code>./scripts/00_bootstrap.sh</code>, operators populate the following core inputs:
+        </p>
+
+        <ul class="spec-list" style="margin-bottom: 1.75rem;">
+          <li class="spec-row">
+            <span class="spec-label">GCP Org &amp; Billing Inputs</span>
+            <span class="spec-detail">
+              <code>GCP_ORG_ID</code>, <code>BILLING_ACCOUNT_ID</code>, and target Folder IDs (<code>OBSERVABILITY_FOLDER_ID</code> and <code>SCOPING_PROJECTS_FOLDER_ID</code>). The executing identity requires Organization/Folder Admin and Project Creator permissions to provision the control/platform projects and Folder-level Log Sink.
+            </span>
+          </li>
+          <li class="spec-row">
+            <span class="spec-label">Observability &amp; Scoping Projects</span>
+            <span class="spec-detail">
+              <code>GCP_PLATFORM_PROJECT_ID</code> (hosts the isolated GKE Forwarder cluster and Pub/Sub log buffer), <code>GCP_SCOPING_PROJECT_ID</code> (the Cloud Monitoring metrics scope), and <code>MONITORED_PROJECT_IDS</code> (JSON array of workload GCP project IDs to attach to the Scoping Project).
+            </span>
+          </li>
+          <li class="spec-row">
+            <span class="spec-label">Workload VPC &amp; ActiveGate</span>
+            <span class="spec-detail">
+              <code>WORKLOAD_PROJECT_ID</code>, <code>ACTIVEGATE_VPC_NAME</code> (existing spoke/Shared VPC), <code>ACTIVEGATE_ZONES</code> (multi-zone array), <code>ACTIVEGATE_SUBNET_CIDR</code>, and <code>ACTIVEGATE_NETWORK_ZONE</code> (e.g., <code>gcp.&lt;region&gt;.prod</code>).
+            </span>
+          </li>
+          <li class="spec-row">
+            <span class="spec-label">Dynatrace Tenant &amp; API Token</span>
+            <span class="spec-detail">
+              <code>DYNATRACE_URL</code> (<code>https://&lt;tenant-id&gt;.live.dynatrace.com</code>) and a single <code>DYNATRACE_API_TOKEN</code> (<code>dt0c01...</code>) scoped with <code>logs.ingest</code>, <code>metrics.ingest</code>, <code>openTelemetryTrace.ingest</code>, <code>activeGateTokenManagement.create</code>, and <code>InstallerDownload</code>.
+            </span>
+          </li>
+        </ul>
+
+        <div class="console-viewer">
+          <div class="console-tabs" id="codeTabs">
+            <button class="console-tab active" data-panel="panel-cli">1 · 5-Step Turnkey CLI</button>
+            <button class="console-tab" data-panel="panel-env">2 · bootstrap.env Template</button>
+            <button class="console-tab" data-panel="panel-otel">3 · OTel SDK (Cloud Run &amp; ADK Agents)</button>
+            <button class="console-tab" data-panel="panel-packer">4 · Golden Image First-Boot Hook</button>
+            <button class="console-tab" data-panel="panel-tf">5 · Terraform Log Sink &amp; Scoping</button>
+          </div>
+
+          <div id="panel-cli" class="code-panel active">
+            <pre class="code-block"><code># 1. Configure environment variables (gitignored locally to protect API tokens &amp; Org IDs)
+cp bootstrap/bootstrap.env.example bootstrap/bootstrap.env
+vi bootstrap/bootstrap.env
+
+# 2. Bootstrap dedicated GCP Observability Project, APIs &amp; GCS Terraform state bucket
+./scripts/00_bootstrap.sh
+
+# 3. Provision Private GKE Autopilot, Folder Log Sink, Pub/Sub, Scoping &amp; Multi-Zone ActiveGates
+./scripts/01_deploy_infra.sh
+
+# 4. Deploy isolated Log Forwarder &amp; Metric Forwarder Helm releases via GKE Workload Identity
+./scripts/02_deploy_forwarders.sh
+
+# 5. Install OneAgent on target GCE VMs via IAP &amp; run end-to-end verification
+./scripts/03_install_oneagent.sh
+./scripts/04_verify_all.sh</code></pre>
+            <div class="console-meta">
+              <span class="console-port">scripts/00_bootstrap.sh &rarr; scripts/04_verify_all.sh</span>
+            </div>
+          </div>
+
+          <div id="panel-env" class="code-panel">
+            <pre class="code-block"><code># GCP Organization, Folders &amp; Billing
+GCP_ORG_ID="123456789012"
+OBSERVABILITY_FOLDER_ID="234567890123"
+SCOPING_PROJECTS_FOLDER_ID="345678901234"
+BILLING_ACCOUNT_ID="01XXXX-XXXXXX-XXXXXX"
+
+# Observability Platform &amp; Cloud Monitoring Scoping
+GCP_PLATFORM_PROJECT_ID="dynatrace-platform-prod"
+GCP_SCOPING_PROJECT_ID="dynatrace-scope-01-prod"
+MONITORED_PROJECT_IDS='["dynatrace-platform-prod", "workload-app-prod"]'
+
+# Dynatrace SaaS Tenant &amp; In-VPC ActiveGate Cluster
+DYNATRACE_URL="https://&lt;your-tenant-id&gt;.live.dynatrace.com"
+DYNATRACE_API_TOKEN="dt0c01.&lt;public-id&gt;.&lt;secret&gt;"
+WORKLOAD_PROJECT_ID="workload-app-prod"
+ACTIVEGATE_VPC_NAME="workload-vpc"
+ACTIVEGATE_ZONES='["us-central1-a", "us-central1-b"]'
+ACTIVEGATE_NETWORK_ZONE="gcp.us-central1.prod"</code></pre>
+            <div class="console-meta">
+              <span class="console-port">bootstrap/bootstrap.env.example</span>
+            </div>
+          </div>
+
+          <div id="panel-otel" class="code-panel">
+            <pre class="code-block"><code>import os
+from opentelemetry import trace, metrics
+from opentelemetry.sdk.resources import Resource
+from opentelemetry.sdk.trace import TracerProvider
+from opentelemetry.sdk.trace.export import BatchSpanProcessor
+from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
+from opentelemetry.sdk.metrics import MeterProvider
+from opentelemetry.sdk.metrics.export import PeriodicExportingMetricReader
+from opentelemetry.exporter.otlp.proto.http.metric_exporter import OTLPMetricExporter
+
+def configure_dynatrace_otel(service_name: str) -&gt; None:
+    dt_url = os.environ["DT_ENV_URL"]      # https://&lt;tenant&gt;.live.dynatrace.com
+    dt_token = os.environ["DT_API_TOKEN"]  # Scopes: openTelemetryTrace.ingest, metrics.ingest
+
+    resource = Resource.create({
+        "service.name": service_name,
+        "cloud.provider": "gcp",
+        "cloud.platform": "gcp_cloud_run",
+    })
+
+    tracer_provider = TracerProvider(resource=resource)
+    tracer_provider.add_span_processor(BatchSpanProcessor(OTLPSpanExporter(
+        endpoint=f"{dt_url}/api/v2/otlp/v1/traces",
+        headers={"Authorization": f"Api-Token {dt_token}"},
+    )))
+    trace.set_tracer_provider(tracer_provider)
+
+    reader = PeriodicExportingMetricReader(OTLPMetricExporter(
+        endpoint=f"{dt_url}/api/v2/otlp/v1/metrics",
+        headers={"Authorization": f"Api-Token {dt_token}"},
+    ))
+    metrics.set_meter_provider(MeterProvider(resource=resource, metric_readers=[reader]))</code></pre>
+            <div class="console-meta">
+              <span class="console-port">OpenTelemetry OTLP Exporter for Cloud Run &amp; Google ADK Agents</span>
+            </div>
+          </div>
+
+          <div id="panel-packer" class="code-panel">
+            <pre class="code-block"><code>#!/usr/bin/env bash
+# First-boot systemd unit baked into the Packer Golden Image:
+# Resolves the VM's GCP region from instance metadata and binds OneAgent to the local ActiveGate zone
+set -euo pipefail
+
+CUSTOM_ZONE=$(curl -sf -H "Metadata-Flavor: Google" \
+  "http://metadata.google.internal/computeMetadata/v1/instance/attributes/dt-network-zone" || true)
+
+if [[ -n "${CUSTOM_ZONE}" ]]; then
+  TARGET_ZONE="${CUSTOM_ZONE}"
+else
+  FULL_ZONE=$(curl -sf -H "Metadata-Flavor: Google" \
+    "http://metadata.google.internal/computeMetadata/v1/instance/zone" | awk -F/ '{print $NF}')
+  REGION="${FULL_ZONE%-*}"
+  TARGET_ZONE="gcp.${REGION}.prod"
+fi
+
+/opt/dynatrace/oneagent/agent/tools/oneagentctl \
+  --set-network-zone="${TARGET_ZONE}" \
+  --set-host-group="golden-image-workloads" \
+  --restart-service</code></pre>
+            <div class="console-meta">
+              <span class="console-port">pipelines/image_factory/ubuntu-2204-dynatrace.pkr.hcl</span>
+            </div>
+          </div>
+
+          <div id="panel-tf" class="code-panel">
+            <pre class="code-block"><code># 1. Folder-Level Aggregated Cloud Logging Sink (Captures all child projects automatically)
+resource "google_logging_folder_sink" "dynatrace_folder_sink" {
+  name             = "dynatrace-org-folder-log-sink"
+  folder           = var.target_folder_id
+  destination      = "pubsub.googleapis.com/projects/${var.project_id}/topics/${google_pubsub_topic.logs.name}"
+  include_children = true
+  filter           = var.log_filter
+}
+
+# 2. Cloud Monitoring Scoping Project Attachment (Sharded &lt;= 375 projects per Scoping Project)
+resource "google_monitoring_monitored_project" "workload_projects" {
+  for_each      = toset(var.monitored_project_ids)
+  metrics_scope = "locations/global/metricsScopes/${var.scoping_project_id}"
+  name          = each.value
+}</code></pre>
+            <div class="console-meta">
+              <span class="console-port">terraform/modules/log_sink/main.tf &amp; metric_scoping/main.tf</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>&copy; 2026 Shane Baccas</span>
+      <span>Toronto, Canada</span>
+    </footer>
+  </div>
+
+  <div id="lightbox" class="lightbox">
+    <img id="lightboxImg" src="" alt="Enlarged architecture diagram" />
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Architecture diagram viewer tabs
+      const archTabs = document.querySelectorAll("#archTabs .console-tab");
+      const archImg = document.getElementById("archImg");
+      const archTitle = document.getElementById("archTitle");
+      const archDesc = document.getElementById("archDesc");
+
+      archTabs.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          archTabs.forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          archImg.src = btn.dataset.src;
+          archTitle.textContent = btn.dataset.title;
+          archDesc.textContent = btn.dataset.desc;
+
+          archImg.classList.remove("liginvertable", "invertable");
+          if (btn.dataset.mode === "tiers") {
+            archImg.classList.add("liginvertable");
+          } else {
+            archImg.classList.add("invertable");
+          }
+        });
+      });
+
+      // Code blueprint viewer tabs
+      const codeTabs = document.querySelectorAll("#codeTabs .console-tab");
+      const panels = document.querySelectorAll(".code-panel");
+
+      codeTabs.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          codeTabs.forEach((b) => b.classList.remove("active"));
+          panels.forEach((p) => p.classList.remove("active"));
+          btn.classList.add("active");
+          const target = document.getElementById(btn.dataset.panel);
+          if (target) {
+            target.classList.add("active");
+          }
+        });
+      });
+
+      // Zoomable image lightbox
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImg = document.getElementById("lightboxImg");
+      document.querySelectorAll(".zoomable").forEach((img) => {
+        img.addEventListener("click", () => {
+          lightboxImg.src = img.src;
+          lightboxImg.className = "";
+          if (img.classList.contains("liginvertable")) {
+            lightboxImg.classList.add("liginvertable");
+          } else if (img.classList.contains("invertable")) {
+            lightboxImg.classList.add("invertable");
+          }
+          lightbox.classList.add("open");
+        });
+      });
+      lightbox.addEventListener("click", () => lightbox.classList.remove("open"));
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") lightbox.classList.remove("open");
+      });
+    });
+  </script>
+</body>
+</html>
